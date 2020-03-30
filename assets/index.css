@@ -1,0 +1,68 @@
+body{
+    /*background-image:url("../images/bodybackground.jpg");*/
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+#logincontainer{
+    box-shadow: 3px 3px 3px 3px #92a898;
+    border-radius: 3px;
+    width:1000px;
+    height: 350px;
+    padding-top: 0px;
+    margin-left: 250px;
+    margin-top: 200px;
+}
+#partone{
+    margin-top: 0px;
+    width:45%;
+    float: left;
+    height: 100%; 
+    background-color:white;
+}
+#parttwo{
+    width: 55%;
+    float: left;
+    height: 100%;
+    background-color: #d8e3db;
+    
+}
+#email,#pass{
+    width: 340px;
+    height: 30px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+    border: 1px solid grey;
+    border-radius: 25px;
+}
+#loginform{
+    padding-top: 50px;
+    padding-left: 120px;
+}
+.fgp{
+    padding-left: 100px;
+    color: darkcyan;
+}
+img{
+    padding-left: 90px;
+    height: 230px;
+    width: 250px;
+}
+#heading{
+    padding-left: 10px;
+    color: darkcyan;
+    font-size: 35px;
+    font-family: comic sans MS;
+}
+#login{
+    margin-top: 25px;
+    margin-left: 110px;
+    margin-bottom: 25px;
+    height: 30px;
+    width: 120px;
+}
+.haveacc{
+    margin-left: 70px;
+    color: darkblue;
+}
