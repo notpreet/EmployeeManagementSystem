@@ -15,20 +15,45 @@
             <img src="images/loginEmployee.png">
         </div>
         <div id="parttwo">
-            <div id="loginform">
+            <form id="loginform" method="POST">
                 <label for="mailID"><b>Email</b></label><br>
-                <input type="email" name="mailID" id="email"><br>
+                <input type="email" name="mailID" id="email" required><br>
                 <label for="pass"><b>Password</b></label><br>
-                <input type="password" name="pass" id="pass"><br>
+                <input type="password" name="pass" id="pass" require><br>
                 <input type="checkbox" name="remember" id="remem">
                 <label id="remb">Remember Me</label>
                 <a href="#" class="fgp">Forgot Password?</a>
                 <br>
-                <button id="login">Login</button>
+                <input type="submit" id="login" name="login" value="Login">
                 <br>
                 <label class="haveacc">Don't have an account?<a href class="signup">Sign Up</a></label>
-            </div>
+            </form>
         </div>
     </div>
+    <?php
+        $conn = new mysqli("localhost","root","","employeedb");
+        if(isset($_POST['login'])){
+            $email = $_POST['mailID'];
+            $pass = $_POST['pass'];
+            $conn = new mysqli("localhost","root","","employeedb");
+            if(mysqli_connect_error()){
+                die("Database connection failed: " . mysqli_connect_error());
+            }
+            $sql = "SELECT * from login where name='".$email."'";
+            $result = $conn->query($sql) or die($conn->error);
+            $row = $result->fetch_assoc();
+            if($pass==$row['password'])
+            {
+                if($row['isadmin'])
+                    header("Location: admindashboard.html");
+                else
+                    header("Location: userdashboard.html");
+            }
+            else{
+                echo "<script>alert('Wrong password')</script>";
+            }
+            
+        }
+    ?>
 </body>
 </html>
