@@ -66,3 +66,6 @@ img{
     margin-left: 70px;
     color: darkblue;
 }
+a{
+    text-decoration: none;
+}
