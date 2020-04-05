@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if(isset($_SESSION['username']))
+    {
+        header("location:admindashboard.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,11 +12,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="assets/index.css" />
+    
 </head>
 <body>
     <div id="logincontainer">
         <div id="partone">
-            <p id="heading">Welcome</p>
+            <p id="heading"></p>
             <img src="images/loginEmployee.png">
         </div>
         <div id="parttwo">
@@ -17,7 +25,10 @@
                 <label for="mailID"><b>Email</b></label><br>
                 <input type="email" name="mailID" id="email" required><br>
                 <label for="pass"><b>Password</b></label><br>
-                <input type="password" name="pass" id="pass" require><br>
+                <input type="password" name="pass" id="pass" require>
+                <button type="button" title="Show Password">         
+                    <span class="fa fa-eye"></span> 
+                </button> <br>
                 <input type="checkbox" name="remember" id="remem">
                 <label id="remb">Remember Me</label>
                 <a href="#" class="fgp">Forgot Password?</a>
@@ -40,10 +51,14 @@
             $sql = "SELECT * from login where name='".$email."'";
             $result = $conn->query($sql) or die($conn->error);
             $row = $result->fetch_assoc();
+            session_start();
+            $_SESSION['username']=$email;
             if($pass==$row['password'])
             {
                 if($row['isadmin'])
-                    header("Location: admindashboard.html");
+                {
+                    header("Location: admindashboard.php");
+                }
                 else
                     header("Location: userdashboard.html");
             }
