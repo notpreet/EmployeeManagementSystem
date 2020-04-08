@@ -1,72 +1,199 @@
-<?php
-    session_start();
-    if(isset($_SESSION['username']))
-    {
-        header("location:admindashboard.php");
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="assets/index.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+    <!-- Bootstrap core CSS -->
+
+    <script src="bootstrap/jquery-3.3.1.slim.min.js"></script>
+    <script src="bootstrap/popper.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <script src="bootstrap/js/bootstrap.min.js"></script>
     
+    <!--on scroll -->
+
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    
+    <style>
+      #main{
+        height: 100vh;
+        width : 100%;
+        overflow-x: hidden;
+      }
+      #about{
+        height: 100vh;
+        width: 100%;
+      }
+      #team{
+        height: 100vh;
+        width: 100%;
+      }
+      #contact{
+        height: 100vh;
+        width: 100%;
+      }
+
+
+      /* media queries*/
+
+      @media only screen and (max-width: 1199px){
+          .caraousel-caption h3{
+            font-size: 32px;;
+          }
+          .caraousel-caption p{
+            font-size: 18px;;
+          }
+      }
+      @media only screen and (max-width: 991px){
+          .caraousel-caption p{
+            display: none;
+          }
+      }
+      @media only screen and (max-width: 767px){
+          .caraousel-caption h3{
+            font-size: 24px;;
+          }
+          .caraousel-caption p{
+            padding-bottom: 6%;;
+          }
+      }
+     /* @media only screen and (max-width: 575px){
+          #aboutcarousel{
+            display: none;
+          }
+          #about{
+            margin-top: 80px;
+          }
+      }*/
+
+
+    </style>
 </head>
-<body>
-    <div id="logincontainer">
-        <div id="partone">
-            <p id="heading"></p>
-            <img src="images/loginEmployee.png">
+<body data-spy="scroll" data-target="#navbarsExampleDefault">
+
+  <!--Code for navbar-->
+
+
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Emploo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item  mr-4">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item  mr-4">
+                    <a class="nav-link" href="#team">Team</a>
+                </li>
+                <li class="nav-item  mr-4">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item mr-4">
+                <a class="nav-link" href="login.php">Login</a>
+              </li>
+            </ul>
         </div>
-        <div id="parttwo">
-            <form id="loginform" method="POST">
-                <label for="mailID"><b>Email</b></label><br>
-                <input type="email" name="mailID" id="email" required><br>
-                <label for="pass"><b>Password</b></label><br>
-                <input type="password" name="pass" id="pass" require>
-                <button type="button" title="Show Password">         
-                    <span class="fa fa-eye"></span> 
-                </button> <br>
-                <input type="checkbox" name="remember" id="remem">
-                <label id="remb">Remember Me</label>
-                <a href="#" class="fgp">Forgot Password?</a>
-                <br>
-                <input type="submit" id="login" name="login" value="Login">
-                <br>
-                <label class="haveacc">Don't have an account?<a href class="signup">Sign Up</a></label>
-            </form>
+    </div>    
+  </nav>
+
+  <!--Here is code for the carousel-->
+  <section id="main">
+      <div id="aboutcarousel" class="carousel slide" data-ride="carousel">
+
+        <ol class="carousel-indicators">
+
+          <li  data-target="#aboutcarousel" data-slide-to="0" class="active"></li>
+          <li  data-target="#aboutcarousel" data-slide-to="1"></li>
+          <li  data-target="#aboutcarousel" data-slide-to="2"></li>
+
+        </ol>
+        
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block " src="images/1.jpg" alt="First">
+            <div class="carousel-caption d-md-block">
+              <h3>Lorem</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum eveniet fugiat vel odio? Veritatis in, blanditiis cum voluptate tenetur voluptatem quidem totam est ipsam odit non assumenda mollitia quam voluptas!</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img class="d-block " src="images/3.jpg" alt="second">
+            <div class="carousel-caption d-md-block">
+              <h3>Lorem</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum eveniet fugiat vel odio? Veritatis in, blanditiis cum voluptate tenetur voluptatem quidem totam est ipsam odit non assumenda mollitia quam voluptas!</p>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <img class="d-block " src="images/14.jpg" alt="third">
+            <div class="carousel-caption d-md-block">
+              <h3>Lorem</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum eveniet fugiat vel odio? Veritatis in, blanditiis cum voluptate tenetur voluptatem quidem totam est ipsam odit non assumenda mollitia quam voluptas!</p>
+            </div>
+          </div>
         </div>
+
+        <a class="carousel-control-prev" href="#aboutcarousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+
+        <a class="carousel-control-next" href="#aboutcarousel" role="button" data-slide="prev">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+
+      </div>
+  </section>
+
+  <section id="about" data-aos="fade-up">
+      <div id="container">
+          <h3>About</h3>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque necessitatibus pariatur adipisci magni exercitationem velit facilis autem obcaecati quas, ipsam debitis, beatae dolorem non ipsa eligendi laborum architecto officiis mollitia!</p>
+
+      </div>
+
+  </section>
+
+  <section id="team" data-aos="fade-up">
+    <div id="container">
+        <h3>About</h3>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque necessitatibus pariatur adipisci magni exercitationem velit facilis autem obcaecati quas, ipsam debitis, beatae dolorem non ipsa eligendi laborum architecto officiis mollitia!</p>
+
     </div>
-    <?php
-        $conn = new mysqli("localhost","root","","employeedb");
-        if(isset($_POST['login'])){
-            $email = $_POST['mailID'];
-            $pass = $_POST['pass'];
-            $conn = new mysqli("localhost","root","","employeedb");
-            if(mysqli_connect_error()){
-                die("Database connection failed: " . mysqli_connect_error());
-            }
-            $sql = "SELECT * from login where name='".$email."'";
-            $result = $conn->query($sql) or die($conn->error);
-            $row = $result->fetch_assoc();
-            session_start();
-            $_SESSION['username']=$email;
-            if($pass==$row['password'])
-            {
-                if($row['isadmin'])
-                {
-                    header("Location: admindashboard.php");
-                }
-                else
-                    header("Location: userdashboard.html");
-            }
-            else{
-                echo "<script>alert('Wrong password')</script>";
-            }
-            
-        }
-    ?>
+
+</section>
+
+
+<section id="contact" data-aos="fade-up">
+  <div id="container">
+      <h3>About</h3>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque necessitatibus pariatur adipisci magni exercitationem velit facilis autem obcaecati quas, ipsam debitis, beatae dolorem non ipsa eligendi laborum architecto officiis mollitia!</p>
+
+  </div>
+
+</section>
+  
+  
+  
+
+  <!--on scroll gestures-->
+
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+
 </body>
-</html>
+</html> 
