@@ -1,12 +1,9 @@
 <?php
     include 'dbcon.php';
     session_start();
-    if(isset($_SESSION['username']))
+    if(isset($_SESSION['bossname']))
     {
-        if($_SESSION['admin']==1)
-          header("location:./admindashboard.php");
-        else
-          header("location:./userdashboard.php");
+        header("Location: ./bossdashboard.php");  
     }
 ?>
 <!DOCTYPE html>
@@ -14,7 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
+    <title>Boss Login</title>
 
     <!-- Bootstrap core CSS -->
 
@@ -68,13 +65,6 @@
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault">
               <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarsDefault">
-              <ul class="navbar-nav mr-auto">
-                  <li class="nav-item active mr-4">
-                      <a class="nav-link" href="./login.php">Login</a>
-                  </li>
-              </ul>
-          </div>
        </div>    
       </nav>
       <div class="container h-50">
@@ -117,25 +107,15 @@
         if(isset($_POST['login'])){
             $email = $_POST['email'];
             $pass = $_POST['pswd'];
-            $sql = "SELECT * from login where username='".$email."'";
+            $sql = "SELECT * from bosslogin where username='".$email."'";
             $result = $conn->query($sql) or die($conn->error);
             $row = $result->fetch_assoc();
             if(mysqli_num_rows($result) > 0 ) 
             {
-              $_SESSION['username']=$row['emp_id'];
-              $_SESSION['admin']=$row['is_hr'];
+              $_SESSION['bossname']="boss";
               if($pass==$row['password'])
               {
-                  if($row['is_hr'])
-                  {
-                      header("Location: ./admindashboard.php");
-                  }
-                  else
-                  {
-                    
-                    header("Location: ./userdashboard.php");
-                    
-                  }
+                  header("Location: ./bossdashboard.php");
               }
               else{
                   echo "<script>alert('Wrong password')</script>";

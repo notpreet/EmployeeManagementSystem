@@ -3,18 +3,20 @@
     session_start();
     if(!isset($_SESSION['username']))
     {
-        header("location:index.php");
+        header("Location:. /index.php");
     }
     if($_SESSION['admin']==0)
     {
-        header("location:index.php");
+        session_unset();
+        session_destroy();
+        header("Location: ./index.php");
     }
 ?>
 <?php
         if(isset($_POST['logout'])){
             session_unset();
             session_destroy();
-            header("location:index.php");
+            header("Location: ./index.php");
         }
 ?>
 <?php
@@ -24,6 +26,7 @@
     $sql1="select * from employee where emp_id='".$_SESSION['username']."'";
     $result1=$conn->query($sql1) or die($conn->error);
     $row1=$result1->fetch_assoc();
+    $curdep=$row1['dept_id'];
     $sql2="select * from login where emp_id='".$_SESSION['username']."'";
     $result2=$conn->query($sql2) or die($conn->error);
     $row2=$result2->fetch_assoc();
@@ -56,23 +59,23 @@
 
     <nav class="navbar navbar-expand-md navbar-light bg-white  shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="#dash"><?php echo $row2['username'];?></a>
+            <a class="navbar-brand" href="./admindashboard.php"><?php echo $row2['username'];?></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarsDefault">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item mr-4">
-                        <a href="employeeprofile.php" class="nav-link">Profile</a>
+                        <a href="./employeeprofile.php" class="nav-link">Profile</a>
                     </li>
                     <li class="nav-item mr-4">
-                        <a href="signup.php" class="nav-link">Register</a>
+                        <a href="./signup.php" class="nav-link">Register</a>
                     </li>
                     <li class="nav-item mr-4">
-                        <a href="leaveapplications.php" class="nav-link">Leave Applications</a>
+                        <a href="./leaveapplications.php" class="nav-link">Leave Applications</a>
                     </li>
                     <li class="nav-item mr-4">
-                        <a href="manageemployee.php" class="nav-link">Manage Employee</a>
+                        <a href="./manageemployee.php" class="nav-link">Manage Employee</a>
                     </li>
                     <li class="nav-item  mr-4">
                         <form method="POST">

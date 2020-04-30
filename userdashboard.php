@@ -3,18 +3,20 @@
     session_start();
     if(!isset($_SESSION['username']))
     {
-        header("location:index.php");
+        header("location:./index.php");
     }
-    if($_SESSION['admin']==1)
+    if($_SESSION['admin']==1 )
     {
-        header("location:index.php");
+        session_unset();
+        session_destroy();
+        header("location:./index.php");
     }
 ?>
 <?php
         if(isset($_POST['logout'])){
             session_unset();
             session_destroy();
-            header("location:index.php");
+            header("location:./index.php");
         }
         
 ?>
@@ -47,17 +49,17 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-light bg-white  shadow-sm">
         <div class="container">
-            <a class="navbar-brand active" href="userdashboard.php"><?php echo $row1['username']; ?></a>
+            <a class="navbar-brand active" href="./userdashboard.php"><?php echo $row1['username']; ?></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarsDefault">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item mr-4">
-                        <a href="employeeprofile.php" class="nav-link">Profile</a>
+                        <a href="./employeeprofile.php" class="nav-link">Profile</a>
                     </li>
                     <li class="nav-item mr-4">
-                        <a href="applyforleave.php" class="nav-link">Apply for Leave</a>
+                        <a href="./applyforleave.php" class="nav-link">Apply for Leave</a>
                     </li>
                     <li class="nav-item active mr-4">
                         <form method="POST">

@@ -3,18 +3,20 @@
     include 'dbcon.php';
     if(!isset($_SESSION['username']))
     {
-        header("location:index.php");
+        header("location:./index.php");
     }
     if($_SESSION['admin']==0)
     {
-        header("location:index.php");
+        session_unset();
+        session_destroy();
+        header("location:./index.php");
     }
 ?>
 <?php
         if(isset($_POST['logout'])){
             session_unset();
             session_destroy();
-            header("location:index.php");
+            header("location:./index.php");
         }
 ?>
 <?php
@@ -28,7 +30,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Manage Employees</title>
+    <title>Manage leave applications</title>
 
     <!-- Bootstrap core CSS -->
 
@@ -138,23 +140,23 @@
 
     <nav class="navbar navbar-expand-md navbar-light bg-white  shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="admindashboard.php"><?php echo $usr['username'];?></a>
+            <a class="navbar-brand" href="./admindashboard.php"><?php echo $usr['username'];?></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarsDefault">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item mr-4">
-                        <a href="employeeprofile.php" class="nav-link">Profile</a>
+                        <a href="./employeeprofile.php" class="nav-link">Profile</a>
                     </li>
                     <li class="nav-item mr-4">
-                        <a href="signup.php" class="nav-link">Register</a>
+                        <a href="./signup.php" class="nav-link">Register</a>
                     </li>
                     <li class="nav-item active mr-4">
-                        <a href="" class="nav-link">Leave Applications</a>
+                        <a href="./leaveapplications.php" class="nav-link">Leave Applications</a>
                     </li>
                     <li class="nav-item mr-4">
-                        <a href="manageemployee.php" class="nav-link">Manage Employee</a>
+                        <a href="./manageemployee.php" class="nav-link">Manage Employee</a>
                     </li>
                     <li class="nav-item  mr-4">
                         <form method="POST">

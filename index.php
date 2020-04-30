@@ -7,7 +7,7 @@
     <!-- Bootstrap core CSS -->
 
     <script src="bootstrap/jquery-3.3.1.slim.min.js"></script>
-    <script src="bootstrap/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
     <script src="bootstrap/js/bootstrap.min.js"></script>
     
@@ -87,7 +87,7 @@
 
   <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm">
     <div class="container">
-        <a class="navbar-brand" href="#">Emploo</a>
+        <a class="navbar-brand" href="./index.php">Emploo</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -104,8 +104,11 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
+            <li class="nav-item mr-4">
+                <a class="nav-link" href="./bosslogin.php">CEO Login</a>
+              </li>
               <li class="nav-item mr-4">
-                <a class="nav-link" href="login.php">Login</a>
+                <a class="nav-link" href="./login.php">Login</a>
               </li>
             </ul>
         </div>
@@ -154,7 +157,7 @@
           <span class="sr-only">Previous</span>
         </a>
 
-        <a class="carousel-control-next" href="#aboutcarousel" role="button" data-slide="prev">
+        <a class="carousel-control-next" href="#aboutcarousel" role="button" data-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </a>
