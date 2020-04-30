@@ -89,7 +89,6 @@
             .info-wrapper h2 {
                 font-size: 20px;
             }
-
         }
     </style>
 
@@ -105,31 +104,21 @@
             xhttp.open("GET","getempdet.php?q="+eid,true);
             xhttp.send();
         }
-        function delDet(eid){
-            swal.fire({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this Account !",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete)=>{
-                if(willDelete){
-                    var xhttp;
-                    xhttp=new XMLHttpRequest();
-                    xhttp.onreadystatechange=function(){
-                    if(this.readyState==4 && this.status==200){
-                        Swal.fire("Poof! Account Has been deleted", {
-                        icon: "success",
-                        });
-                        location.reload();
-                    }
-                };
-                xhttp.open("GET","delemp.php?q="+eid,true);
-                xhttp.send();
+        function delDet(eid)
+        {
+            var xhttp;
+            xhttp=new XMLHttpRequest();
+            xhttp.onreadystatechange=function()
+            {
+                if(this.readyState==4 && this.status==200)
+                {
+                    console.log(this.responseText);
                 }
-            });
+            }
+            xhttp.open("GET","delemp.php?q="+eid,true);
+            xhttp.send();
         }
+        location.reload();
     </script>
 </head>
 
