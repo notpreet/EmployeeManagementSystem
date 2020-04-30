@@ -35,6 +35,13 @@
         height: 100vh;
         width: 100%;
       }
+      #aboutcarousel .carousel-item {
+        width: 100%;
+        height: 100vh;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
 
 
       /* media queries*/
@@ -72,19 +79,19 @@
 
     </style>
 </head>
-<body data-spy="scroll" data-target="#navbarsExampleDefault">
+<body data-spy="scroll" data-target="#navbarsDefault">
 
   <!--Code for navbar-->
 
 
 
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="#">Emploo</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <div class="collapse navbar-collapse" id="navbarsDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item  mr-4">
                     <a class="nav-link" href="#about">About</a>

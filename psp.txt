@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Power</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link rel="stylesheet" type="text/css" href="register.css"/> -->
+        <script src="bootstrap/jquery-3.3.1.slim.min.js"></script>
+        <script src="bootstrap/popper.min.js"></script>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <style>
+            #already_exist{
+                display:inline;
+                color: orange;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container d-flex flex-column align-content-center mt-2">
+            <h3 class="display-4">Sign Up</h3>
+            <div id="signinform" class="d-flex justify-content-center mx-auto w-50 mh-25 text-white">
+                <form class="was-validated p-3" method="POST" action="#">
+                    <div class="input-group w-75 m-auto d-flex flex-row justify-content-center" id="first_last">
+                        <input class="p-2 w-50 h-25" type="text" placeholder="First Name" id="first" name="first" value="<?php if(isset($_POST['first'])) echo $_POST['first'] ?>" required>
+                        <input class="p-2 w-50 h-25" type="text" placeholder="Last Name" id="last" name="last" value="<?php if(isset($_POST['last'])) echo $_POST['last'] ?>" required><br>
+                    </div>
+                    <div class="form-group w-75 m-auto d-flex flex-column align-content-center"><br>
+                        <input class="p-2 h-25 align-middle" type="email" placeholder="email" id="email" name="email" value="<?php if(isset($_POST['email'])) echo $_POST['email'] ?>" required><br>
+                        <input class="p-2 h-25 align-middle" type="text" placeholder="username" id="user" name="user" value="<?php if(isset($_POST['user'])) echo $_POST['user'] ?>" required><br>
+                        
+                        <input class="p-2 h-25 align-middle" type="password" placeholder="password" id="pass" name="pass" value="<?php if(isset($_POST['pass'])) echo $_POST['pass'] ?>" required>
+                        <p id="already_exist"></p><br>
+                        <button type="submit" id="signup" name="signup" class="btn btn-light btn-sm w-50 align-self-center">Sign Up</button>
+                        <br>
+                        <p class="mx-auto" id="alreadysignedup">Already Signed Up? <a id="signin" href="index.php">Sign In</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <?php 
+            $con=new mysqli("localhost","root","","users");
+            session_start();
+            if(isset($_POST['signup'])) {
+                $firstname = ($_POST['first']);
+                $lastname = ($_POST['last']);
+                $email = ($_POST['email']);
+                $username =($_POST['user']);
+                $password =($_POST['pass']);
+
+                $vld_email = $con->query("select count(*) from users where email='".$email."';");
+                $emails = $vld_email->fetch_array();
+
+                $vld_user = $con->query("select count(*) from users where username='".$username."';");
+                $users = $vld_user->fetch_array();
+                
+                $result = $con->query("select count(*) from users;");
+                $row = $result->fetch_array();
+                $user_id = $row[0] + 1;
+
+                $sql = "insert into users(user_id,username,email,password,firstname,lastname) values(".$user_id.",'".$username."','".$email."','".$password."','".$firstname."','".$lastname."');";
+
+                if($emails[0]>=1) {
+                    echo "<script>document.getElementById('already_exist').style.display = 'inline';</script>";
+                    echo "<script>document.getElementById('already_exist').innerHTML = 'Email ID already exists!';</script>";
+                }
+                elseif($users[0]>=1) {
+                    echo "<script>document.getElementById('already_exist').style.display = 'inline';</script>";
+                    echo "<script>document.getElementById('already_exist').innerHTML = 'Username already exists!';</script>";
+                }
+                else {
+                    if($con->query($sql)) {
+                        $_SESSION['user'] = $user_id;
+                        $_SESSION['time'] = time();
+                        header("location: home.php");
+                    }
+                    else {
+                        die($con->error);
+                    }
+                }
+            }
+        ?>
+    </body>
+</html>
