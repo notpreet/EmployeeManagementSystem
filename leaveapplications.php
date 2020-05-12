@@ -170,7 +170,8 @@ $usr = $re->fetch_assoc();
             } else {
                 ?>
                 <div class="w-100 d-flex justify-content-center align-items-center p-5 m-5">
-                    <h4>No Leaves To Manage</h4>
+                        <p>Sit back and Relax,No leave requests</p>
+                        <img id="sitback" src="./images/sitbackandrelax.svg">
                 </div>
             <?php
             }

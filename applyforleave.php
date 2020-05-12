@@ -111,7 +111,7 @@ $row1 = $result1->fetch_assoc();
                                 <div class="form-group row mb-0">
                                     <div class="col-md-6 offset-md-5">
                                         <button type="submit" class="btn btn-primary" name="sub" data-toggle="modal" data-target="#myModal">
-                                            Register
+                                            Apply
                                         </button>
                                     </div>
                                 </div>

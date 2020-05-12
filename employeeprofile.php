@@ -136,6 +136,19 @@ $row1 = $result1->fetch_assoc();
                                     <input id="email" type="text" class="form-control" name="email" value=<?php echo $row['email']; ?> readonly required autofocus>
                                 </div>
                             </div>
+                            <?php
+                            if ($row['edit_profile'] == 0) {
+                            ?>
+                            <div class="form-group row">
+                                <label for="pswd" class="col-md-4 col-form-label text-md-right">Password</label>
+
+                                <div class="col-md-6">
+                                    <input id="pswd" type="password" class="form-control" name="email" value=<?php echo $row['email']; ?>  required autofocus>
+                                </div>
+                            </div>
+                            <?php
+                            }
+                            ?>
                             <div class="form-group row">
                                 <label for="mobile" class="col-md-4 col-form-label text-md-right">Mobile Number</label>
                                 <div class="col-md-6">
@@ -313,6 +326,10 @@ $row1 = $result1->fetch_assoc();
     if (isset($_POST['save'])) {
         $addr = $_POST['address'];
         $state = $_POST['state'];
+        if ($row['edit_profile'] == 0) {
+            $password=$_POST['pswd'];
+            $ins=$conn->query("update login set password='".$password."' where emp_id='".$_SESSION['username']."'");
+        }
         $country = $_POST['country'];
         $gender = $_POST['gender'];
         $martial = $_POST['marriage'];

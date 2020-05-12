@@ -11,7 +11,9 @@
     margin: 15px auto;
     transition: all 0.3s ease-in-out;
 }
-
+#sitback{
+    height: 480px;
+}
 .card-wrapper:hover {
     cursor: pointer;
     transform: translateY(-10px);
