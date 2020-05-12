@@ -1,21 +1,21 @@
 <?php
-    include 'dbcon.php';
-    session_start();
-    if(!isset($_SESSION['bossname']))
-    {
-        session_unset();
-        session_destroy();
-        header("Location:. /index.php");
-    }
-    if(isset($_POST['logout'])){
-        session_unset();
-        session_destroy();
-        header("Location: ./index.php");
-    }
+include 'dbcon.php';
+session_start();
+if (!isset($_SESSION['bossname'])) {
+    session_unset();
+    session_destroy();
+    header("Location:. /index.php");
+}
+if (isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: ./index.php");
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,84 +23,71 @@
 
     <!-- Bootstrap core CSS -->
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-    <style>
-        .empselector{
-            display:none;
-        }
-    </style>
 
+    <link rel="stylesheet" href="./assets/css/addnewHR.css">
     <script>
-        function showdet(deptid)
-        {
+        function showdet(deptid) {
             var xhttp;
-            if(deptid=="")
-            {
+            if (deptid == "") {
                 console.log("blah");
-            }
-            else
-            {
-                xhttp=new XMLHttpRequest();
-                xhttp.onreadystatechange=function(){
-                    if(this.readyState==4 && this.status==200){
-                        document.querySelector(".empselector").style.display="block";
-                        document.querySelector(".empbody").innerHTML=this.responseText;
+            } else {
+                xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.querySelector(".empselector").style.display = "block";
+                        document.querySelector(".empbody").innerHTML = this.responseText;
                     }
                 }
-                xhttp.open("GET","showemployees.php?q="+deptid,true);
+                xhttp.open("GET", "showemployees.php?q=" + deptid, true);
                 xhttp.send();
             }
         }
-        function make()
-        {
-            var empid=document.getElementById("sel_hr").value;
+
+        function make() {
+            var empid = document.getElementById("sel_hr").value;
             var xhttp;
-            if(empid=="")
-            {
+            if (empid == "") {
                 console.log("blah");
-            }
-            else
-            {
-                xhttp=new XMLHttpRequest();
-                xhttp.onreadystatechange=function(){
-                    if(this.readyState==4 && this.status==200){
-                        console.log(this.responseText);
+            } else {
+                xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        window.location.reload();
                     }
                 }
-                xhttp.open("GET","makehr.php?q="+empid,true);
+                xhttp.open("GET", "makehr.php?q=" + empid, true);
                 xhttp.send();
             }
         }
-        function remEmp()
-        {
-            var depid=document.getElementById("del").value;
+
+        function remEmp() {
+            var depid = document.getElementById("del").value;
             var xhttp;
-            if(depid=="")
-            {
+            if (depid == "") {
                 console.log("blah");
-            }
-            else
-            {
-                xhttp=new XMLHttpRequest();
-                xhttp.onreadystatechange=function(){
-                    if(this.readyState==4 && this.status==200){
-                        console.log(this.responseText);
+            } else {
+                xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        window.location.reload();
                     }
                 }
-                xhttp.open("GET","rmhr.php?q="+depid,true);
+                xhttp.open("GET", "rmhr.php?q=" + depid, true);
                 xhttp.send();
             }
         }
     </script>
+
 </head>
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-md navbar-light bg-white  shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark  shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="./bossdashboard.php">Welcome CEO</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault">
@@ -116,7 +103,7 @@
                     </li>
                     <li class="nav-item  mr-4">
                         <form method="POST">
-                            <button class="nav-link" name="logout" style="border:hidden; background-color:white;">Logout</button>
+                            <button class="nav-link" name="logout" style="border:hidden; background-color:#343A40;">Logout</button>
                         </form>
                     </li>
                 </ul>
@@ -144,7 +131,7 @@
                                             $re = $conn->query($qu) or die($conn->error);
                                             while ($ro = $re->fetch_assoc()) {
                                             ?>
-                                                <option value=<?php echo "'".$ro['dept_id']."'"; ?>><?php echo $ro['dept_name']; ?></option>
+                                                <option value=<?php echo "'" . $ro['dept_id'] . "'"; ?>><?php echo $ro['dept_name']; ?></option>
                                             <?php
                                             }
                                             ?>
@@ -157,7 +144,7 @@
                 </div>
             </div>
 
-            
+
         </div>
         <div class="container empselector">
             <div class="row justify-content-center">
@@ -170,7 +157,7 @@
                         </div>
                     </div>
                 </div>
-            </div>    
+            </div>
         </div>
     </main>
 </body>

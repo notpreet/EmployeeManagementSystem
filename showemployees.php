@@ -12,16 +12,22 @@
         <table class='table table-hover table-striped'>
                 <thead>
                     <tr>
+                        <th>EmployeeID</th>
                         <th>Firstname</th>
                         <th>Middlename</th>
                         <th>Lastname</th>
+                        <th>Post</th>
+                        <th>Salary</th>
                     </tr>
                 </thead>
                 <tbody>";
         echo"            <tr>";
+        echo"               <td>".$p1['emp_id']."</td>";
         echo"               <td>".$p1['first_name']."</td>";
         echo"               <td>".$p1['middle_name']."</td>";
         echo"               <td>".$p1['last_name']."</td>";
+        echo"               <td>".$p1['post']."</td>";
+        echo"               <td>".$p1['salary']."</td>";
         echo"   </tbody>";
         echo"</table>";
         echo "Click the button to immediately remove the current HR";

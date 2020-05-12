@@ -1,20 +1,24 @@
 <?php
-    include 'dbcon.php';
-    session_start();
-    if(!isset($_SESSION['bossname']))
-    {
-        session_unset();
-        session_destroy();
-        header("Location:. /index.php");
-    }
-    if(isset($_POST['logout'])){
-        session_unset();
-        session_destroy();
-        header("Location: ./index.php");
-    }
+include 'dbcon.php';
+session_start();
+if(isset($_POST['deptid']))
+{
+    setcookie("depart",$_POST['deptid'],time()+(180),"/");
+}
+if (!isset($_SESSION['bossname'])) {
+    session_unset();
+    session_destroy();
+    header("Location:. /index.php");
+}
+if (isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: ./index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,10 +26,10 @@
 
     <!-- Bootstrap core CSS -->
 
-    <script src="bootstrap/jquery-3.3.1.slim.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 </head>
@@ -61,8 +65,8 @@
         </nav>
         <?php
         if (isset($_POST['register'])) {
-            $deptid=$_COOKIE['deptid'];
-            $sql = "SELECT department.current_employeed,department.dept_offset,department.max_empl from department where dept_id=".$deptid;
+            $deptid=$_COOKIE['depart'];
+            $sql = "SELECT department.current_employeed,department.dept_offset,department.max_empl from department where dept_id=" . $deptid;
             $result = $conn->query($sql) or die($conn->error);
             $row = $result->fetch_assoc();
             $user = $_POST['user_name'];
@@ -72,6 +76,7 @@
             $email = $_POST['email'];
             $mob = $_POST['mob_num'];
             $post = $_POST['post'];
+            $sal=$_POST['sal'];
             $sql2 = "select * from login where username='" . $user . "'";
             $result1 = $conn->query($sql2) or die($conn->error);
             $pass = $user;
@@ -90,7 +95,7 @@
                         $eid = $row['dept_offset'] . (string) $eid1;
                         $sql1 = "insert into login values ('" . $eid . "','" . $user . "','" . $pass . "','0','" . date("Y/m/d") . "')";
                         $result1 = $conn->query($sql1) or die($conn->error);
-                        $sql2 = "insert into employee(emp_id,first_name,middle_name,last_name,post,dept_id,phone,email) values ('" . $eid . "','" . $first . "','" . $mid . "','" . $last . "','" . $post . "'," . $deptid . ",'" . $mob . "','" . $email . "')";
+                        $sql2 = "insert into employee(emp_id,first_name,middle_name,last_name,post,dept_id,phone,email,salary) values ('" . $eid . "','" . $first . "','" . $mid . "','" . $last . "','" . $post . "'," . $deptid . ",'" . $mob . "','" . $email . "',".$sal.")";
                         $result2 = $conn->query($sql2) or die($conn->error);
                         header("location:./addnewHR.php");
                     }
@@ -155,9 +160,15 @@
                                             <input id="post" type="text" class="form-control" name="post" required>
                                         </div>
                                     </div>
+                                    <div class="form-group row">
+                                        <label for="sal" class="col-md-4 col-form-label text-md-right">Salary</label>
+                                        <div class="col-md-6">
+                                            <input id="sal" type="number" class="form-control" name="sal" required>
+                                        </div>
+                                    </div>
                                     <div class="form-group row mb-0">
                                         <div class="col-md-6 offset-md-5">
-                                            <button type="submit" class="btn btn-primary" class="register" name="register" data-toggle="modal" data-target="#myModal">
+                                            <button type="submit" class="btn btn-primary" class="register" name="register">
                                                 Register
                                             </button>
                                         </div>
